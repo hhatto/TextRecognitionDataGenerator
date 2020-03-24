@@ -87,6 +87,10 @@ def create_strings_randomly(length, allow_variable, count, let, num, sym, lang):
 
     pool = ""
     if let:
+        if lang == "ja":
+            pool += "".join(
+                [chr(i) for i in range(12288, 40908)]
+            )  # Unicode range of CJK Symbols and Punctuation ~ CJK Unified Ideographs
         if lang == "cn":
             pool += "".join(
                 [chr(i) for i in range(19968, 40908)]
@@ -98,7 +102,7 @@ def create_strings_randomly(length, allow_variable, count, let, num, sym, lang):
     if sym:
         pool += "!\"#$%&'()*+,-./:;?@[\\]^_`{|}~"
 
-    if lang == "cn":
+    if lang in ("ja", "cn"):
         min_seq_len = 1
         max_seq_len = 2
     else:
